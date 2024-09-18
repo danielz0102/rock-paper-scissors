@@ -1,3 +1,5 @@
+let humanScore = 0, computerScore = 0
+
 function getComputerChoice() {
     let choice = Math.floor(Math.random() * 3)
     
@@ -7,12 +9,18 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    let choice = +prompt('Enter a number between 1 and 3')
+    let choice = prompt('Enter an option: Rock, Paper or Scissors').toLocaleLowerCase().trim()
 
-    return choice === 1 ? 'Rock' :
-        choice === 2 ? 'Paper' :
-        choice === 3 ? 'Scissors' :
-        'Sorry, that\'s not correct. You have to enter a number between 1 and 3.'
+    if (choice !== 'rock' && choice !== 'paper' && choice !== 'scissors') {
+        alert('Sorry, that\'s not correct. Please, choice rock, paper or scissors.')
+        return 0
+    }
+
+    return choice
 }
 
-console.info(getHumanChoice())
+function playRound(humanChoice, computerChoice) {
+
+}
+
+console.log(getHumanChoice())
