@@ -16,7 +16,7 @@ function getHumanChoice() {
 
         if (choice !== 'ROCK' && choice !== 'PAPER' && choice !== 'SCISSORS') {
             console.error('Sorry, that\'s not correct. Please, choice rock, paper or scissors.')
-            getHumanChoice()
+            choice = getHumanChoice()
         }
     }
 
