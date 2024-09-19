@@ -9,17 +9,25 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    let choice = prompt('Enter an option: Rock, Paper or Scissors').toUpperCase().trim()
+    let choice = prompt('Enter an option: Rock, Paper or Scissors')
 
-    if (choice !== 'ROCK' && choice !== 'PAPER' && choice !== 'SCISSORS') {
-        console.error('Sorry, that\'s not correct. Please, choice rock, paper or scissors.')
-        getHumanChoice()
+    if (choice !== null) {
+        choice = choice.toUpperCase().trim()
+
+        if (choice !== 'ROCK' && choice !== 'PAPER' && choice !== 'SCISSORS') {
+            console.error('Sorry, that\'s not correct. Please, choice rock, paper or scissors.')
+            getHumanChoice()
+        }
     }
 
     return choice
 }
 
 function playRound(humanChoice, computerChoice) {
+    if (humanChoice === null) {
+        return
+    }
+
     if (humanChoice === 'ROCK' && computerChoice === 'SCISSORS'
         || humanChoice === 'PAPER' && computerChoice === 'ROCK'
         || humanChoice === 'SCISSORS' && computerChoice === 'PAPER'
@@ -42,4 +50,10 @@ function playRound(humanChoice, computerChoice) {
     console.info('Computer score: ' + computerScore)
 }
 
-playRound(getHumanChoice(), getComputerChoice())
+let humanChoice = getHumanChoice()
+
+if (humanChoice === 'ROCK' || humanChoice === 'PAPER' || humanChoice === 'SCISSORS') {
+    playRound(humanChoice, getComputerChoice())
+} else {
+    console.log('The game was cancelled')
+}
