@@ -1,2 +1,2 @@
 # rock-paper-scissors
-Rock Paper Scissors game developed with JavaScript
+Rock Paper Scissors browser console game developed with JavaScript
