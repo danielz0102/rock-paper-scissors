@@ -1,28 +1,24 @@
 let humanScore = 0, computerScore = 0, round = 1
 
-const rockBtn = document.querySelector('#rock')
-const paperBtn = document.querySelector('#paper')
-const scissorsBtn = document.querySelector('#scissors')
+
 const resultContainer = document.querySelector('#result')
 const result = document.createElement('p')
 const playerScore = document.createElement('p')
 const botScore = document.createElement('p')
+const LAST_ROUND = 5
 
 resultContainer.appendChild(result)
 resultContainer.appendChild(playerScore)
 resultContainer.appendChild(botScore)
 
-document.body.addEventListener('click', e => {
-    let playerChoice
-
-    playerChoice = (e.target === rockBtn ? 'ROCK' :
-        e.target === paperBtn ? 'PAPER' :
-        'SCISSORS'
-    )
-    
+document.querySelector('#buttons-container').addEventListener('click', e => {
+    let playerChoice = e.target.id.toUpperCase()
     playRound(playerChoice, getComputerChoice())
 })
 
+document.querySelector('#restart').addEventListener('click', () => {
+    location.reload()
+})
 
 function getComputerChoice() {
     let choice = Math.floor(Math.random() * 3)
@@ -60,7 +56,7 @@ function playRound(humanChoice, computerChoice) {
     botScore.textContent = 'Bot score: ' + computerScore
 
     round++
-    if (round > 5) showWinner()
+    if (round > LAST_ROUND) showWinner()
 }
 
 function showWinner() {
@@ -74,4 +70,8 @@ function showWinner() {
     } else {
         result.textContent += ' IT\'S A TIE!'
     }
+}
+
+function disableButtons() {
+
 }
