@@ -1,15 +1,16 @@
-let humanScore = 0, computerScore = 0, round = 1
-
+let playerScore = 0, computerScore = 0, round = 1
 
 const resultContainer = document.querySelector('#result')
-const result = document.createElement('p')
-const playerScore = document.createElement('p')
-const botScore = document.createElement('p')
+const resultParagraph = document.createElement('p')
+const playerScoreParagraph = document.createElement('p')
+const botScoreParagraph = document.createElement('p')
+const roundParagraph = document.createElement('p')
 const LAST_ROUND = 5
 
-resultContainer.appendChild(result)
-resultContainer.appendChild(playerScore)
-resultContainer.appendChild(botScore)
+resultContainer.appendChild(roundParagraph)
+resultContainer.appendChild(resultParagraph)
+resultContainer.appendChild(playerScoreParagraph)
+resultContainer.appendChild(botScoreParagraph)
 
 document.querySelector('#buttons-container').addEventListener('click', e => {
     let playerChoice = e.target.id.toUpperCase()
@@ -29,49 +30,57 @@ function getComputerChoice() {
     )
 }
 
-function playRound(humanChoice, computerChoice) {
-    if (humanChoice === null) {
+function playRound(playerChoice, computerChoice) {
+    if (playerChoice === null) {
         return
     }
 
-    if (humanChoice === 'ROCK' && computerChoice === 'SCISSORS'
-        || humanChoice === 'PAPER' && computerChoice === 'ROCK'
-        || humanChoice === 'SCISSORS' && computerChoice === 'PAPER'
+    roundParagraph.textContent = `ROUND ${round}`
+
+    if (playerChoice === 'ROCK' && computerChoice === 'SCISSORS'
+        || playerChoice === 'PAPER' && computerChoice === 'ROCK'
+        || playerChoice === 'SCISSORS' && computerChoice === 'PAPER'
     ) {
-        result.textContent = `${humanChoice} vs ${computerChoice}. You Win!`
-        humanScore++
+        resultParagraph.textContent = `${playerChoice} vs ${computerChoice}. You Win!`
+        playerScore++
     }
-    else if (humanChoice === 'ROCK' && computerChoice === 'PAPER'
-        || humanChoice === 'PAPER' && computerChoice === 'SCISSORS'
-        || humanChoice === 'SCISSORS' && computerChoice === 'ROCK'
+    else if (playerChoice === 'ROCK' && computerChoice === 'PAPER'
+        || playerChoice === 'PAPER' && computerChoice === 'SCISSORS'
+        || playerChoice === 'SCISSORS' && computerChoice === 'ROCK'
     ) {
-        result.textContent = `${humanChoice} vs ${computerChoice}. You Loose!`
+        resultParagraph.textContent = `${playerChoice} vs ${computerChoice}. You Loose!`
         computerScore++
     }
     else {
-        result.textContent = `${humanChoice} vs ${computerChoice}. It's a tie!`
+        resultParagraph.textContent = `${playerChoice} vs ${computerChoice}. It's a tie!`
     }
 
-    playerScore.textContent = 'Your score: ' + humanScore
-    botScore.textContent = 'Bot score: ' + computerScore
+    playerScoreParagraph.textContent = 'Your score: ' + playerScore
+    botScoreParagraph.textContent = 'Bot score: ' + computerScore
 
     round++
     if (round > LAST_ROUND) showWinner()
 }
 
 function showWinner() {
-    result.textContent = 'The game is over!'
+    resultParagraph.textContent = 'The game is over!'
 
-    if (humanScore < computerScore) {
-        result.textContent += ' ... you loose :('
+    if (playerScore < computerScore) {
+        resultParagraph.textContent += ' ... you loose :('
     }
-    else if (humanScore > computerScore) {
-        result.textContent += ' YOU WIN!'
+    else if (playerScore > computerScore) {
+        resultParagraph.textContent += ' YOU WIN!'
     } else {
-        result.textContent += ' IT\'S A TIE!'
+        resultParagraph.textContent += ' IT\'S A TIE!'
     }
+
+    disableButtons()
 }
 
 function disableButtons() {
+    const buttons = document.querySelectorAll('#buttons-container button')
 
+    buttons.forEach(button => {
+        button.disabled = true
+    })
 }
