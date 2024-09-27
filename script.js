@@ -1,13 +1,11 @@
-let playerScore = 0, computerScore = 0, round = 1
+let playerScore = 0, botScore = 0, round = 1
 
 const resultContainer = document.querySelector('#result')
 const resultParagraph = document.createElement('p')
 const playerScoreParagraph = document.createElement('p')
 const botScoreParagraph = document.createElement('p')
 const roundParagraph = document.createElement('p')
-const LAST_ROUND = 5
 
-resultContainer.appendChild(roundParagraph)
 resultContainer.appendChild(resultParagraph)
 resultContainer.appendChild(playerScoreParagraph)
 resultContainer.appendChild(botScoreParagraph)
@@ -35,8 +33,6 @@ function playRound(playerChoice, computerChoice) {
         return
     }
 
-    roundParagraph.textContent = `ROUND ${round}`
-
     if (playerChoice === 'ROCK' && computerChoice === 'SCISSORS'
         || playerChoice === 'PAPER' && computerChoice === 'ROCK'
         || playerChoice === 'SCISSORS' && computerChoice === 'PAPER'
@@ -49,26 +45,27 @@ function playRound(playerChoice, computerChoice) {
         || playerChoice === 'SCISSORS' && computerChoice === 'ROCK'
     ) {
         resultParagraph.textContent = `${playerChoice} vs ${computerChoice}. You Loose!`
-        computerScore++
+        botScore++
     }
     else {
         resultParagraph.textContent = `${playerChoice} vs ${computerChoice}. It's a tie!`
     }
 
     playerScoreParagraph.textContent = 'Your score: ' + playerScore
-    botScoreParagraph.textContent = 'Bot score: ' + computerScore
+    botScoreParagraph.textContent = 'Bot score: ' + botScore
 
     round++
-    if (round > LAST_ROUND) showWinner()
+
+    if (playerScore === 5 || botScore === 5) showWinner()
 }
 
 function showWinner() {
     resultParagraph.textContent = 'The game is over!'
 
-    if (playerScore < computerScore) {
+    if (playerScore < botScore) {
         resultParagraph.textContent += ' ... you loose :('
     }
-    else if (playerScore > computerScore) {
+    else if (playerScore > botScore) {
         resultParagraph.textContent += ' YOU WIN!'
     } else {
         resultParagraph.textContent += ' IT\'S A TIE!'
