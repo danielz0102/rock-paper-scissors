@@ -1,5 +1,23 @@
 let humanScore = 0, computerScore = 0
 
+const rockBtn = document.querySelector('#rock')
+const paperBtn = document.querySelector('#paper')
+const scissorsBtn = document.querySelector('#scissors')
+const resultContainer = document.querySelector('#result')
+const combat = document.createElement('p')
+const playerScore = document.createElement('p')
+const botScore = document.createElement('p')
+
+resultContainer.appendChild(combat)
+resultContainer.appendChild(playerScore)
+resultContainer.appendChild(botScore)
+
+document.body.addEventListener('click', e => {
+    if (e.target === rockBtn) playRound('ROCK', getComputerChoice())
+    if (e.target === paperBtn) playRound('PAPER', getComputerChoice())
+    if (e.target === scissorsBtn) playRound('SCISSORS', getComputerChoice())
+})
+
 function getComputerChoice() {
     let choice = Math.floor(Math.random() * 3)
     
@@ -32,48 +50,22 @@ function playRound(humanChoice, computerChoice) {
         || humanChoice === 'PAPER' && computerChoice === 'ROCK'
         || humanChoice === 'SCISSORS' && computerChoice === 'PAPER'
     ) {
-        console.log(`${humanChoice} vs ${computerChoice}. You Win!`)
+        combat.textContent = `${humanChoice} vs ${computerChoice}. You Win!`
         humanScore++
     }
     else if (humanChoice === 'ROCK' && computerChoice === 'PAPER'
         || humanChoice === 'PAPER' && computerChoice === 'SCISSORS'
         || humanChoice === 'SCISSORS' && computerChoice === 'ROCK'
     ) {
-        console.log(`${humanChoice} vs ${computerChoice}. You Loose!`)
+        combat.textContent = `${humanChoice} vs ${computerChoice}. You Loose!`
         computerScore++
     }
     else {
-        console.log(`${humanChoice} vs ${computerChoice}. It\'s a tie!`)
+        combat.textContent = `${humanChoice} vs ${computerChoice}. It's a tie!`
     }
 
-    console.info('Your score: ' + humanScore)
-    console.info('Bot score: ' + computerScore)
-}
-
-function playGame() {
-    let rounds = 1
-    const LAST_ROUND = 5
-
-    while (rounds <= 5) {
-        let humanChoice = getHumanChoice()
-        
-        if (humanChoice === 'ROCK' || humanChoice === 'PAPER' || humanChoice === 'SCISSORS') {
-            playRound(humanChoice, getComputerChoice())
-        } else {
-            break
-        }
-        
-        if (rounds === 5) {
-            break
-        }
-        rounds++
-    }
-    
-    if (rounds === LAST_ROUND) {
-        showWinner()
-    } else {
-        console.log('The game was cancelled')
-    }
+    playerScore.textContent = 'Your score: ' + humanScore
+    botScore.textContent = 'Bot score: ' + computerScore
 }
 
 function showWinner() {
@@ -91,5 +83,3 @@ function showWinner() {
         console.log(score + 'It\'s a tie!')
     }
 }
-
-playGame()
