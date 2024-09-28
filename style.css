@@ -25,6 +25,10 @@ main p {
     margin-top: 0.5rem;
 }
 
+h1 {
+    font-size: 3rem;
+}
+
 .result-paragraph {
     color: #dd3e26;
     font-weight: bold;
