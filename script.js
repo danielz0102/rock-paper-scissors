@@ -6,13 +6,17 @@ const playerScoreParagraph = document.createElement('p')
 const botScoreParagraph = document.createElement('p')
 const roundParagraph = document.createElement('p')
 
+resultParagraph.classList.add('result-paragraph')
+
 resultContainer.appendChild(resultParagraph)
 resultContainer.appendChild(playerScoreParagraph)
 resultContainer.appendChild(botScoreParagraph)
 
 document.querySelector('#buttons-container').addEventListener('click', e => {
-    let playerChoice = e.target.id.toUpperCase()
-    playRound(playerChoice, getComputerChoice())
+    if (e.target.tagName === 'BUTTON') {
+        let playerChoice = e.target.id.toUpperCase()
+        playRound(playerChoice, getComputerChoice())
+    }
 })
 
 document.querySelector('#restart').addEventListener('click', () => {
@@ -29,10 +33,6 @@ function getComputerChoice() {
 }
 
 function playRound(playerChoice, computerChoice) {
-    if (playerChoice === null) {
-        return
-    }
-
     if (playerChoice === 'ROCK' && computerChoice === 'SCISSORS'
         || playerChoice === 'PAPER' && computerChoice === 'ROCK'
         || playerChoice === 'SCISSORS' && computerChoice === 'PAPER'
@@ -70,6 +70,8 @@ function showWinner() {
     } else {
         resultParagraph.textContent += ' IT\'S A TIE!'
     }
+
+    resultParagraph.classList.add('big-text')
 
     disableButtons()
 }
