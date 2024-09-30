@@ -47,17 +47,23 @@ button {
     padding: 0.5rem;
     border: none;
     border-radius: 3px;
-    font-size: 2rem;
+    font-size: 5rem;
     background-color: #ffffff00;
     transition: background-color 0.2s ease-in-out;
 }
 
 #restart {
-    color: #f6f7eb;
+    color: #dd3e26;
     margin-right: auto;
+    transition: color 0.2s ease-in-out;
 }
 
-button:hover {
+#restart:hover {
+    cursor: pointer;
+    color: #000;
+}
+
+button:hover:not(#restart) {
     cursor: pointer;
     background-color: #dd3e26;
 }
