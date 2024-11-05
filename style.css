@@ -48,24 +48,32 @@ button {
     border: none;
     border-radius: 3px;
     font-size: 5rem;
-    background-color: #ffffff00;
-    transition: background-color 0.2s ease-in-out;
+    background-color: transparent;
+    transition: filter 0.2s, transform 0.2s;
 }
 
 #restart {
     color: #dd3e26;
     margin-right: auto;
-    transition: color 0.2s ease-in-out;
+    transition: color 0.2s, transform 0.5s;
 }
 
 #restart:hover {
     cursor: pointer;
-    color: #000;
+    color: #fff;
+}
+
+#restart:active {
+    transform: rotate(360deg);
 }
 
 button:hover:not(#restart) {
     cursor: pointer;
-    background-color: #dd3e26;
+    filter: drop-shadow(0 0 10px #dd3e26);
+}
+
+button:active:not(#restart) {
+    transform: translateY(-10px);
 }
 
 button:disabled {
